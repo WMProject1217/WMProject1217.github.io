@@ -4,6 +4,7 @@
 <meta charset='UTF-8'>
 <title>Main Page</title>
 <link href='./favicon.ico' rel='icon' type='image/ico'>
+<script src='./jquery-3.4.1.js'></script>
 <style>
 /*By WMProject1217*/
 * {
@@ -475,7 +476,7 @@ a {
 }
 
 .wmuibackgrounda {
-    background-image: url(/library/image/background/a.jpg);
+    background-image: url(./background.jpg);
     background-color: #FFFFFF;
     background-size: cover;
     width: 100vw;
@@ -1481,31 +1482,19 @@ function WMUIWelcomeMessage() {
     var timescdata;
     var tempa;
     var tempb;
-    if (location.pathname === "/") {
-        timescdata = WMUINowTimeSC();
-        tempa = timescdata.split("-");
-        tempb = tempa[3].split(":");
-        now = tempb[0];
-        if (now > 7 && now <= 16) text = "早上好，今天也要继续努力喵~";
-        else if (now > 16 && now <= 27) text = "上午好！工作顺利嘛？<br>不要久坐，多起来走动走动哦！";
-        else if (now > 27 && now <= 36) text = "中午了，工作了一个上午，现在是午餐时间！";
-        else if (now > 36 && now <= 47) text = "午后很容易犯困呢，今天的运动目标完成了吗？";
-        else if (now > 47 && now <= 51) text = "傍晚了！<br>窗外夕阳的景色很美丽呢，最美不过夕阳红～";
-        else if (now > 51 && now <= 57) text = "晚上好，今天过得怎么样？";
-        else if (now > 57 && now <= 63) text = "晚安，各位前辈要好好休息哦。<br>不要背着吾辈偷偷熬夜啦~";
-        else text = "晚安，各位前辈要好好休息哦。<br>不要背着吾辈偷偷熬夜啦~";
-    } else if (document.referrer !== "") {
-        const referrer = new URL(document.referrer),
-            domain = referrer.hostname.split(".")[1];
-        if (location.hostname === referrer.hostname) text = `欢迎访问<span>「${document.title.split(" - ")[0]}」</span>`;
-        else if (domain === "baidu") text = `Hello！来自 百度搜索 的朋友<br>你是搜索 <span>${referrer.search.split("&wd=")[1].split("&")[0]}</span> 找到的我吗？`;
-        else if (domain === "so") text = `Hello！来自 360搜索 的朋友<br>你是搜索 <span>${referrer.search.split("&q=")[1].split("&")[0]}</span> 找到的我吗？`;
-        else if (domain === "google") text = `Hello！来自 谷歌搜索 的朋友<br>欢迎阅读<span>「${document.title.split(" - ")[0]}」</span>`;
-        else text = `Hello！来自 <span>${referrer.hostname}</span> 的朋友`;
-    } else {
-        text = `欢迎来到 Wemakeli!`;
-    }
-    notify.success('主页', text ,8);
+    timescdata = WMUINowTimeSC();
+    tempa = timescdata.split("-");
+    tempb = tempa[3].split(":");
+    now = tempb[0];
+    if (now > 7 && now <= 16) text = "早上好，今天也要继续努力喵~";
+    else if (now > 16 && now <= 27) text = "上午好！工作顺利嘛？<br>不要久坐，多起来走动走动哦！";
+    else if (now > 27 && now <= 36) text = "中午了，工作了一个上午，现在是午餐时间！";
+    else if (now > 36 && now <= 47) text = "午后很容易犯困呢，今天的运动目标完成了吗？";
+    else if (now > 47 && now <= 51) text = "傍晚了！<br>窗外夕阳的景色很美丽呢，最美不过夕阳红～";
+    else if (now > 51 && now <= 57) text = "晚上好，今天过得怎么样？";
+    else if (now > 57 && now <= 63) text = "晚安，各位前辈要好好休息哦。<br>不要背着吾辈偷偷熬夜啦~";
+    else text = "晚安，各位前辈要好好休息哦。<br>不要背着吾辈偷偷熬夜啦~";
+    notify.success('消息', text ,8);
 }
 function WMUINowTimeSC(){
     var time=new Date();
@@ -1627,12 +1616,16 @@ function jumpdown(){
 </script>
 </head>
 <body>
+<div class='wmuinotify-container'></div>
+<h3>Main Page</h3>
 <button class='wmuibutton' id='totestvideo' onclick='jumptest()'>Press here to jump to the test video</button>
 <button class='wmuibutton' id='todownload' onclick='jumpdown()'>Press here to jump to the download list</button>
 <div>By WMProject1217</div>
 <a href='https://github.com/WMProject1217'>Press here to jump to the Github of WMProject1217</a>
+<div class='wmuibackgrounda'></div>
 </body>
 <script>
 AUTOEXEC();
+WMUIWelcomeMessage();
 </script>
 </html>
