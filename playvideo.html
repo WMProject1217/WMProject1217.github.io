@@ -1,0 +1,317 @@
+<title>Playvideo Test</title>
+<!--script src="kicumcia-audio.js"></script>
+<button style='font-family: "Minecraft"; color:white; text-shadow: 1px 1px 1px #000000;text-align:right; font-size: 12px;' type="button" onclick="playthebgm();">Play It!</button>
+<div id="kicumcia_audio_player"></div-->
+<style>
+    #menu {
+        position: fixed;
+        top: -500px;
+        border-style: solid;
+        border-width: 1px 1px 1px 1px;
+        border-color: rgb(151,151,151);
+        user-select: none;
+    } 
+    .menu_item{
+        background-color: rgb(240,240,240);
+        color: #000000;
+        width: 240px;
+        display: inline-block;
+        border-style: solid;
+        border-color: rgb(215,215,215);
+        cursor: pointer;
+        user-select: none;
+        transition: all .3s;
+    }
+    .menu_item:hover{
+        background-color: rgb(209,226,242);
+        border-color: transparent;
+        color: #000000;
+        border-color: rgb(120,174,229);
+        box-shadow: 1px 1px 30px rgba(0,0,0,.15),0 6px 15px rgba(36,37,38,.15),inset 5px 5px 15px transparent;
+        z-index: 45000;
+    }
+</style>
+    <div id="menu">
+        <span style="background-color: rgb(240,240,240);display: inline-block;width:30px;border-style: solid;border-width: 0px 0px 0px 0px;border-color: rgb(240,240,240);">&nbsp;</span><span class="menu_item" style="border-width: 0px 0px 0px 1px;" onclick="log(1)">查看</span><br />
+        <span style="background-color: rgb(240,240,240);display: inline-block;width:30px;border-style: solid;border-width: 0px 0px 0px 0px;border-color: rgb(240,240,240);">&nbsp;</span><span class="menu_item" style="border-width: 0px 0px 0px 1px;" onclick="log(2)">排列方式</span><br />
+        <span style="background-color: rgb(240,240,240);display: inline-block;width:30px;border-style: solid;border-width: 0px 0px 1px 0px;border-color: rgb(240,240,240);">&nbsp;</span><span class="menu_item" style="border-width: 0px 0px 1px 1px;" onclick="log(3)">刷新</span><br />
+        <span style="background-color: rgb(240,240,240);display: inline-block;width:30px;border-style: solid;border-width: 0px 0px 0px 0px;border-color: rgb(240,240,240);">&nbsp;</span><span class="menu_item" style="border-width: 0px 0px 0px 1px;" onclick="CopyString(document.getSelection().toString())">复制</span><br />
+        <span style="background-color: rgb(240,240,240);display: inline-block;width:30px;border-style: solid;border-width: 0px 0px 1px 0px;border-color: rgb(240,240,240);">&nbsp;</span><span class="menu_item" style="border-width: 0px 0px 1px 1px;" onclick="log(3)">粘贴</span><br />
+        <span style="background-color: rgb(240,240,240);display: inline-block;width:30px;border-style: solid;border-width: 0px 0px 0px 0px;border-color: rgb(240,240,240);">&nbsp;</span><span class="menu_item" style="border-width: 0px 0px 0px 1px;" onclick="log(3)">个性化</span><br />
+        <span style="background-color: rgb(240,240,240);display: inline-block;width:30px;border-style: solid;border-width: 0px 0px 0px 0px;border-color: rgb(240,240,240);">&nbsp;</span><span class="menu_item" style="border-width: 0px 0px 0px 1px;" onclick="log(3)">关于</span>
+    </div> 
+<pre>
+    视频位置:<ef id="video_urlpath">未知</ef>
+    准备状态:<ef id="video_onplay">未知</ef>
+    当前时间:<ef id="video_nowtime">未知</ef>
+    视频长度:<ef id="video_length">未知</ef>
+    循环状况:<ef id="video_onloop">未知</ef>
+    音量大小:<ef id="video_volume">未知</ef>
+    播放速度:<ef id="video_speed">未知</ef>
+    静音状况:<ef id="video_muted">未知</ef>
+</pre>
+<input id="VideoPosition" type="range" min=0 max=1000 value=0 style="width:420px;"></input>
+    <br>
+    <!--button onclick="LoadVideo();">加载</button-->
+    <button id="PlayPauseButton" onclick="PlayPauseVideo();">播放</button>
+    <button onclick="ReloadVideo();">重载</button>
+    <button onclick="LoopVideo()">设置是否循环</button>
+    <button onclick="MuteVideo()">设置是否静音</button>
+    <table border="1">
+        <tr>
+            <td>
+    <span>音量</span>     
+    <input id="VideoVolume" type="range" min=0 max=100 value=100 onchange="ChangeVideoVolume(document.getElementById('VideoVolume').value / 100);"></input>
+            </td>
+        </tr>
+    </table>
+    <table border="1">
+        <tr>
+            <td>
+    <span>速度</span>     
+    <input id="VideoSpeed" type="range" min=20 max=600 value=100 onchange="ChangeVideoSpeed(document.getElementById('VideoSpeed').value / 100);"></input>
+    <button onclick="ChangeVideoSpeed(0.5);">0.5倍速</button>
+    <button onclick="ChangeVideoSpeed(1.0);">1.0倍速</button>
+    <button onclick="ChangeVideoSpeed(1.5);">1.5倍速</button>
+    <button onclick="ChangeVideoSpeed(2.0);">2.0倍速</button>
+            </td>
+        </tr>
+    </table>
+<video id="wmvideoplayer" style="z-index:0;"></video>
+<canvas id="wmdanmakuplayer" style="position:absolute;z-index:1;"></canvas>
+<script>
+window.wmvideoplayer = document.getElementById("wmvideoplayer");
+window.wmdanmakuplayer = document.getElementById("wmdanmakuplayer");
+
+function LoadVideo(FileUrl) {
+    window.wmvideoplayer.src = FileUrl;
+    setInterval(function () {
+        document.getElementById("video_urlpath").innerHTML = window.wmvideoplayer.currentSrc;
+        document.getElementById("video_onplay").innerHTML = window.wmvideoplayer.readyState;
+        document.getElementById("video_nowtime").innerHTML = window.wmvideoplayer.currentTime;
+        document.getElementById("video_length").innerHTML = window.wmvideoplayer.duration;
+        document.getElementById("video_onloop").innerHTML = window.wmvideoplayer.loop;
+        document.getElementById("video_volume").innerHTML = window.wmvideoplayer.volume;
+        document.getElementById("video_speed").innerHTML = window.wmvideoplayer.playbackRate;
+        document.getElementById("video_muted").innerHTML = window.wmvideoplayer.muted;
+        document.getElementById("VideoPosition").value = window.wmvideoplayer.currentTime / window.wmvideoplayer.duration * 1000;
+    },50);
+}
+
+function PlayPauseVideo() {
+    if (window.wmvideoplayer.paused!=1) {
+        document.getElementById("PlayPauseButton").innerHTML = "播放";
+        window.wmvideoplayer.pause();
+    } else {
+        document.getElementById("PlayPauseButton").innerHTML = "暂停";
+        window.wmvideoplayer.play();
+    }
+}
+
+function ReloadVideo() {
+    document.getElementById("PlayPauseButton").innerHTML = "播放";
+    window.wmvideoplayer.load();
+}
+
+function LoopVideo() {
+    if (window.wmvideoplayer.loop==1) {
+        window.wmvideoplayer.loop=0;
+    } else {
+        window.wmvideoplayer.loop=1;
+    }
+}
+
+function MuteVideo() {
+    if (window.wmvideoplayer.muted==1) {
+        window.wmvideoplayer.muted=0;
+    } else {
+        window.wmvideoplayer.muted=1;
+    }
+}
+
+function ChangeVideoVolume(value) {
+    window.wmvideoplayer.volume = value;
+    document.getElementById('VideoVolume').value = value * 100;
+}
+
+function ChangeVideoSpeed(value) {
+    window.wmvideoplayer.playbackRate = value;
+    document.getElementById('VideoSpeed').value = value * 100;
+}
+
+LoadVideo("./test.mp4");
+
+function CopyString(TargetText) {
+    let oInput = document.createElement("textarea");
+    oInput.value = TargetText;
+    document.body.appendChild(oInput);
+    oInput.select();
+    document.execCommand("Copy");
+    oInput.className = "oInput";
+    oInput.remove();
+}
+
+window.oncontextmenu = function(element){
+    element.preventDefault();
+    var menu=document.getElementById('menu');
+    screen.width + " x " + screen.height
+    if ((element.clientX + menu.offsetWidth) > document.body.clientWidth) {
+        menu.style.left = (document.body.clientWidth - menu.offsetWidth) + 'px';
+    } else {
+        menu.style.left = element.clientX + 'px';
+    }
+    if ((element.clientY + menu.offsetHeight) > document.body.clientHeight) {
+        menu.style.top = (document.body.clientHeight - menu.offsetHeight) + 'px';
+    } else {
+        menu.style.top = element.clientY + 'px';
+    }
+}
+
+window.onclick = function(element){
+    document.getElementById('menu').style.top = -500 + 'px';
+} 
+
+setInterval(function () {
+    window.wmdanmakuplayer.style.width = window.wmvideoplayer.clientWidth;
+    window.wmdanmakuplayer.style.height = window.wmvideoplayer.clientHeight;
+    window.wmdanmakuplayer.width = window.wmvideoplayer.clientWidth;
+    window.wmdanmakuplayer.height = window.wmvideoplayer.clientHeight;
+    window.wmdanmakuplayer.style.left = window.wmvideoplayer.getBoundingClientRect().left + 'px';
+},200);
+</script>
+<!--Danmaku Functions-->
+<script>
+    let danmakulist = []; // 存储弹幕对象
+    let canvas = document.getElementById('wmdanmakuplayer');
+    let context = canvas.getContext('2d');
+
+    function step(){
+       context.clearRect(0, 0, window.wmdanmakuplayer.width, window.wmdanmakuplayer.height);
+       // 遍历danmakulist，在canvas中进行绘制
+       danmakulist.forEach(item=>{ //item: 弹幕对象
+         context.fillStyle = "white";
+         context.font = '20px 微软雅黑';
+         item.x--;
+         context.fillText(item.content, item.x, item.y);
+       })
+       // 通知下次绘制UI时，再次执行step
+       window.requestAnimationFrame(step);
+     }
+    window.requestAnimationFrame(step);
+
+    // 启动一个定时器 每秒执行60次，重绘UI
+    /*window.setInterval(()=>{
+      // 把canvas中的像素全部清除  重新绘制
+      context.clearRect(0, 0, 640, 360);
+      // 遍历danmakulist，在canvas中进行绘制
+      danmakulist.forEach(item=>{ //item: 弹幕对象
+        context.fillStyle = "white";
+        context.font = '20px 微软雅黑';
+        item.x--;
+        context.fillText(item.content, item.x, item.y);
+      })
+    }, 16);*/
+
+    // 发送弹幕
+    /*send.addEventListener('click', ()=>{
+      let content = input.value; // 文本框的内容
+      // 封装为dm对象，存入danmakulist
+      danmakulist.push({
+        content: content,
+        x: 600,
+        y: (Math.floor(Math.random() * 12)+1) * 30
+      });
+      console.log(danmakulist);
+    })*/
+    function SendDanmaku(Type,Color,Text) {
+        let content = Text;
+      danmakulist.push({
+        content: content,
+        x: 1000,
+        y: (Math.floor(Math.random() * 12)+1) * 30
+      });
+      console.log(danmakulist);
+    }
+</script>
+<div class='kicumcia-ui' id='kicumcia-ui' style='position:fixed; z-index: 114514;'>
+    <pre style='font-family: "Minecraft Pixel"; position:fixed; color:#FFFFFF; text-shadow: 1px 1px 1px #000000; top:0px; left:3px; width: 99%; text-align:left; font-size: 18px; pointer-events: none;'>
+    WMMCLNSS
+    WMProject1217 Studios
+    <ef id="kicumcia-debug-fps">0</ef> FPS, 2 Objects Loaded
+    Nginx Website Server 1 ms
+    
+    </pre>
+    <pre style='font-family: "Minecraft Pixel"; position:fixed; color:#FFFFFF; text-shadow: 1px 1px 1px #000000; top:0px; right:3px; width: 100%; text-align:right; font-size: 18px; pointer-events: none;'>
+    Kicumcia-Core 0.9.1
+    Memory : <ef id="kicumcia-debug-memory-usage">0 MB / 0 MB</ef>
+    Allocated : <ef id="kicumcia-debug-memory-usage2">0 MB</ef>
+    Display : <ef id="kicumcia-debug-display">0 x 0</ef>
+    </pre>
+    </div>
+    <script id="debugstatusongoing">
+    function kicumcia_remix_size(size) {
+      var sizer = size;
+      var sizedd = "B";
+      if (sizer > 1024) {
+        sizer = sizer / 1024;
+        sizedd = "KB";
+        if (sizer > 1024) {
+          sizer = sizer / 1024;
+          sizedd = "MB";
+          if (sizer > 1024) {
+            sizer = sizer / 1024;
+            sizedd = "GB";
+            if (sizer > 1024) {
+              sizer = sizer / 1024;
+              sizedd = "TB";
+              if (sizer > 1024) {
+                sizer = sizer / 1024;
+                sizedd = "PB";
+                if (sizer > 1024) {
+                  sizer = sizer / 1024;
+                  sizedd = "EB";
+                }
+              }
+            }
+          }
+        }
+      }
+      return sizer.toFixed(2)+" "+sizedd;
+    }
+    setInterval(function () {
+        document.getElementById("kicumcia-debug-memory-usage").innerHTML = kicumcia_remix_size(window.performance.memory.usedJSHeapSize) + " / " + kicumcia_remix_size(window.performance.memory.jsHeapSizeLimit);
+        document.getElementById("kicumcia-debug-memory-usage2").innerHTML = kicumcia_remix_size(window.performance.memory.totalJSHeapSize);
+        document.getElementById("kicumcia-debug-display").innerHTML = screen.width + " x " + screen.height
+    },500);
+    
+    var rAF = function () {
+        return (
+            window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 1000 / 60);
+            }
+        );
+    }();
+    var frame = 0;
+    var allFrameCount = 0;
+    var lastTime = Date.now();
+    var lastFameTime = Date.now();
+    var loop = function () {
+        var now = Date.now();
+        var fs = (now - lastFameTime);
+        var fps = Math.round(1000 / fs);
+        lastFameTime = now;
+        allFrameCount++;
+        frame++;
+        if (now > 1000 + lastTime) {
+            var fps = Math.round((frame * 1000) / (now - lastTime));
+            window.fps = fps;
+            document.getElementById("kicumcia-debug-fps").innerHTML = fps;
+            frame = 0;
+            lastTime = now;
+        };
+        rAF(loop);
+    }
+    loop();
+    </script>
