@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="./icon.png" type="image/icon">
+<title>WMPiano Keyboard</title>
+<style>
+@font-face {
+    font-family: 'fontex';
+    src: url('./fontex.ttf'),
+         url('./fontex.otf'),
+         url('./fontex.woff'),
+         url('./fontex.eot');
+    font-weight: bold;
+}
+
+* {
+    font-family: 'fontex';
+}
+
+body {
+    display: block;
+    margin: 8px;
+    line-height: normal;
+    background-color: #000000;
+}
+
+button {
+    cursor: pointer;
+    border: 2px solid #FFFFFF;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-size: 1.17vw;
+    outline: 0;
+    transition: all .3s;
+    text-shadow: 1px 1px 8px rgba(0,0,0,.15);
+    padding: 1.39vh 1.56vw;
+    height: 6.94vh;
+    width: 9.36vw;
+}
+
+button:hover:enabled {
+    background-color: #FFFFFF;
+    border-color: transparent;
+    color: #000000;
+    box-shadow: 1px 1px 10px rgba(0,0,0,.15),0 6px 15px rgba(36,37,38,.15),inset 5px 5px 5px transparent;
+}
+
+button:active:enabled {
+    background-color: #D9D9D9;
+}
+
+.notebuttonsl {
+    padding: 1.39vh 0.39vw;
+    width: 3.90vw;
+}
+
+.notebuttonst {
+    font-size: 2.4vw;
+    padding: 1.39vh 0.39vw;
+    width: 12.17vw;
+    height: 12.17vh;
+}
+
+.notebuttonsb {
+    font-size: 2.4vw;
+    padding: 1.39vh 0.39vw;
+    width: 15.25vw;
+    height: 15.25vh;
+}
+
+.WMUI_Page_Background {
+    background-image: url(./background.png);
+    background-color: #FFFFFF;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.WMUI_Page_Background_LayoutA {
+    background-color: rgba(0,0,0,.7);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:1vh;left:1vw;z-index:2301;user-select:none;">
+<span style="color:#FFFFFF;">键盘映射模式: </span>
+<select id="notemirrorselector" onchange="refreshnotemirror();">
+  <option value="default">默认(Default)</option>
+  <option value="windsonglyre">风物之诗琴(Windsong Lyre)</option>
+  <option value="vintagelyre">老旧的诗琴(Vintage Lyre)</option>
+  <option value="sky">光·遇(Sky)</option>
+</select>
+<br>
+<span style="color:#FFFFFF;">显示键盘类型: </span>
+<select id="notekeyboardselector" onchange="refreshnotekeyboard();">
+  <option value="default">默认(Default)</option>
+  <option value="windsonglyre">风物之诗琴(Windsong Lyre)</option>
+  <option value="vintagelyre">老旧的诗琴(Vintage Lyre)</option>
+  <option value="sky">光·遇(Sky)</option>
+</select>
+<!--br>
+<button onclick="PageResizer();">刷新页面布局</button-->
+</div>
+<div id="pertabblock" style="position:relative;height:27vh;"></div>
+<div id="pianocontainer" style="position:relative;margin:auto;width:fit-content;height:fit-content;z-index:2301;user-select: none;">
+<!--button onclick="ASTAUTOPLAY();">ASTAUTOPLAY</button-->
+<div id="pianokeyboarddefault" style="display:block;">
+    <button class="notebuttons" onclick="playnote('C6');">C6</button>
+    <button class="notebuttonsl" onclick="playnote('CS6');">C#6</button>
+    <button class="notebuttons" onclick="playnote('D6');">D6</button>
+    <button class="notebuttonsl" onclick="playnote('DS6');">D#6</button>
+    <button class="notebuttons" onclick="playnote('E6');">E6</button>
+    <button class="notebuttons" onclick="playnote('F6');">F6</button>
+    <button class="notebuttonsl" onclick="playnote('FS6');">F#6</button>
+    <button class="notebuttons" onclick="playnote('G6');">G6</button>
+    <button class="notebuttonsl" onclick="playnote('GS6');">G#6</button>
+    <button class="notebuttons" onclick="playnote('A6');">A6</button>
+    <button class="notebuttonsl" onclick="playnote('AS6');">A#6</button>
+    <button class="notebuttons" onclick="playnote('B6');">B6</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttons" onclick="playnote('C5');">C5</button>
+    <button class="notebuttonsl" onclick="playnote('CS5');">C#5</button>
+    <button class="notebuttons" onclick="playnote('D5');">D5</button>
+    <button class="notebuttonsl" onclick="playnote('DS5');">D#5</button>
+    <button class="notebuttons" onclick="playnote('E5');">E5</button>
+    <button class="notebuttons" onclick="playnote('F5');">F5</button>
+    <button class="notebuttonsl" onclick="playnote('FS5');">F#5</button>
+    <button class="notebuttons" onclick="playnote('G5');">G5</button>
+    <button class="notebuttonsl" onclick="playnote('GS5');">G#5</button>
+    <button class="notebuttons" onclick="playnote('A5');">A5</button>
+    <button class="notebuttonsl" onclick="playnote('AS5');">A#5</button>
+    <button class="notebuttons" onclick="playnote('B5');">B5</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttons" onclick="playnote('C4');">C4</button>
+    <button class="notebuttonsl" onclick="playnote('CS4');">C#4</button>
+    <button class="notebuttons" onclick="playnote('D4');">D4</button>
+    <button class="notebuttonsl" onclick="playnote('DS4');">D#4</button>
+    <button class="notebuttons" onclick="playnote('E4');">E4</button>
+    <button class="notebuttons" onclick="playnote('F4');">F4</button>
+    <button class="notebuttonsl" onclick="playnote('FS4');">F#4</button>
+    <button class="notebuttons" onclick="playnote('G4');">G4</button>
+    <button class="notebuttonsl" onclick="playnote('GS4');">G#4</button>
+    <button class="notebuttons" onclick="playnote('A4');">A4</button>
+    <button class="notebuttonsl" onclick="playnote('AS4');">A#4</button>
+    <button class="notebuttons" onclick="playnote('B4');">B4</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttons" onclick="playnote('C3');">C3</button>
+    <button class="notebuttonsl" onclick="playnote('CS3');">C#3</button>
+    <button class="notebuttons" onclick="playnote('D3');">D3</button>
+    <button class="notebuttonsl" onclick="playnote('DS3');">D#3</button>
+    <button class="notebuttons" onclick="playnote('E3');">E3</button>
+    <button class="notebuttons" onclick="playnote('F3');">F3</button>
+    <button class="notebuttonsl" onclick="playnote('FS3');">F#3</button>
+    <button class="notebuttons" onclick="playnote('G3');">G3</button>
+    <button class="notebuttonsl" onclick="playnote('GS3');">G#3</button>
+    <button class="notebuttons" onclick="playnote('A3');">A3</button>
+    <button class="notebuttonsl" onclick="playnote('AS3');">A#3</button>
+    <button class="notebuttons" onclick="playnote('B3');">B3</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttons" onclick="playnote('C2');">C2</button>
+    <button class="notebuttonsl" onclick="playnote('CS2');">C#2</button>
+    <button class="notebuttons" onclick="playnote('D2');">D2</button>
+    <button class="notebuttonsl" onclick="playnote('DS2');">D#2</button>
+    <button class="notebuttons" onclick="playnote('E2');">E2</button>
+    <button class="notebuttons" onclick="playnote('F2');">F2</button>
+    <button class="notebuttonsl" onclick="playnote('FS2');">F#2</button>
+    <button class="notebuttons" onclick="playnote('G2');">G2</button>
+    <button class="notebuttonsl" onclick="playnote('GS2');">G#2</button>
+    <button class="notebuttons" onclick="playnote('A2');">A2</button>
+    <button class="notebuttonsl" onclick="playnote('AS2');">A#2</button>
+    <button class="notebuttons" onclick="playnote('B2');">B2</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttons" onclick="playnote('C1');">C1</button>
+    <button class="notebuttonsl" onclick="playnote('CS1');">C#1</button>
+    <button class="notebuttons" onclick="playnote('D1');">D1</button>
+    <button class="notebuttonsl" onclick="playnote('DS1');">D#1</button>
+    <button class="notebuttons" onclick="playnote('E1');">E1</button>
+    <button class="notebuttons" onclick="playnote('F1');">F1</button>
+    <button class="notebuttonsl" onclick="playnote('FS1');">F#1</button>
+    <button class="notebuttons" onclick="playnote('G1');">G1</button>
+    <button class="notebuttonsl" onclick="playnote('GS1');">G#1</button>
+    <button class="notebuttons" onclick="playnote('A1');">A1</button>
+    <button class="notebuttonsl" onclick="playnote('AS1');">A#1</button>
+    <button class="notebuttons" onclick="playnote('B1');">B1</button>
+</div>
+<div id="pianokeyboardwindsonglyre" style="display:none;">
+    <button class="notebuttonst" onclick="playnote('C5');">C5</button>
+    <button class="notebuttonst" onclick="playnote('D5');">D5</button>
+    <button class="notebuttonst" onclick="playnote('E5');">E5</button>
+    <button class="notebuttonst" onclick="playnote('F5');">F5</button>
+    <button class="notebuttonst" onclick="playnote('G5');">G5</button>
+    <button class="notebuttonst" onclick="playnote('A5');">A5</button>
+    <button class="notebuttonst" onclick="playnote('B5');">B5</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttonst" onclick="playnote('C4');">C4</button>
+    <button class="notebuttonst" onclick="playnote('D4');">D4</button>
+    <button class="notebuttonst" onclick="playnote('E4');">E4</button>
+    <button class="notebuttonst" onclick="playnote('F4');">F4</button>
+    <button class="notebuttonst" onclick="playnote('G4');">G4</button>
+    <button class="notebuttonst" onclick="playnote('A4');">A4</button>
+    <button class="notebuttonst" onclick="playnote('B4');">B4</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttonst" onclick="playnote('C3');">C3</button>
+    <button class="notebuttonst" onclick="playnote('D3');">D3</button>
+    <button class="notebuttonst" onclick="playnote('E3');">E3</button>
+    <button class="notebuttonst" onclick="playnote('F3');">F3</button>
+    <button class="notebuttonst" onclick="playnote('G3');">G3</button>
+    <button class="notebuttonst" onclick="playnote('A3');">A3</button>
+    <button class="notebuttonst" onclick="playnote('B3');">B3</button>
+</div>
+<div id="pianokeyboardvintagelyre" style="display:none;">
+    <button class="notebuttonst" onclick="playnote('C5');">C5</button>
+    <button class="notebuttonst" onclick="playnote('CS5');">C#5</button>
+    <button class="notebuttonst" onclick="playnote('DS5');">D#5</button>
+    <button class="notebuttonst" onclick="playnote('F5');">F5</button>
+    <button class="notebuttonst" onclick="playnote('G5');">G5</button>
+    <button class="notebuttonst" onclick="playnote('GS5');">G#5</button>
+    <button class="notebuttonst" onclick="playnote('AS5');">A#5</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttonst" onclick="playnote('C4');">C4</button>
+    <button class="notebuttonst" onclick="playnote('D4');">D4</button>
+    <button class="notebuttonst" onclick="playnote('DS4');">D#4</button>
+    <button class="notebuttonst" onclick="playnote('F4');">F4</button>
+    <button class="notebuttonst" onclick="playnote('G4');">G4</button>
+    <button class="notebuttonst" onclick="playnote('A4');">A4</button>
+    <button class="notebuttonst" onclick="playnote('AS4');">A#4</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttonst" onclick="playnote('C3');">C3</button>
+    <button class="notebuttonst" onclick="playnote('D3');">D3</button>
+    <button class="notebuttonst" onclick="playnote('DS3');">D#3</button>
+    <button class="notebuttonst" onclick="playnote('F3');">F3</button>
+    <button class="notebuttonst" onclick="playnote('G3');">G3</button>
+    <button class="notebuttonst" onclick="playnote('A3');">A3</button>
+    <button class="notebuttonst" onclick="playnote('AS3');">A#3</button>
+</div>
+<div id="pianokeyboardsky" style="display:none;">
+    <button class="notebuttonsb" onclick="playnote('C3');">C3</button>
+    <button class="notebuttonsb" onclick="playnote('D3');">D3</button>
+    <button class="notebuttonsb" onclick="playnote('E3');">E3</button>
+    <button class="notebuttonsb" onclick="playnote('F3');">F3</button>
+    <button class="notebuttonsb" onclick="playnote('G3');">G3</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttonsb" onclick="playnote('A3');">A3</button>
+    <button class="notebuttonsb" onclick="playnote('B3');">B3</button>
+    <button class="notebuttonsb" onclick="playnote('C4');">C4</button>
+    <button class="notebuttonsb" onclick="playnote('D4');">D4</button>
+    <button class="notebuttonsb" onclick="playnote('E4');">E4</button>
+    <div style="position:relative;height:5px;"></div>
+    <button class="notebuttonsb" onclick="playnote('F4');">F4</button>
+    <button class="notebuttonsb" onclick="playnote('G4');">G4</button>
+    <button class="notebuttonsb" onclick="playnote('A4');">A4</button>
+    <button class="notebuttonsb" onclick="playnote('B4');">B4</button>
+    <button class="notebuttonsb" onclick="playnote('C5');">C5</button>
+</div>
+</div>
+<div id="copyrightinfo" style="position:fixed;pointer-events:none;bottom:0px;left:0.5vw;height:6vh;width:32vw;line-height:3vh;font-size:2vh;color:#FFFFFF;text-shadow: 0.2vh 0.2vh 0.2vh #000000;z-index:65535;user-select: none;">WMPiano Keyboard 0.192.65 NWjs Edition<br>WMProject1217 Studios 2022 保留所有权利</div>
+<div id="copyrightinfo" style="position:fixed;pointer-events:none;bottom:0px;right:0.5vw;height:6vh;width:32vw;line-height:3vh;font-size:2vh;color:#FFFFFF;text-shadow: 0.2vh 0.2vh 0.2vh #000000;z-index:65535;text-align:right;user-select: none;">Insider Preview Development Edition<br>For testing only</div>
+<div class="WMUI_Page_Background"></div>
+<div class="WMUI_Page_Background_LayoutA"></div>
+<!--script>
+    var spots = {} , touches , timer;
+
+    document.addEventListener('touchstart',function(e){
+        e.preventDefault();
+        [].forEach.call(e.targetTouches,function(touch){
+            //对每一根触摸在屏幕上的手指都生成一个元素，并且用touch.identifier作为该元素的唯一标识，触摸结束后清除引用的元素
+            if(spots[touch.identifier]){
+                return;
+            }
+            var spot = spots[touch.identifier] = document.createElement('div');
+            spot.classList.add('spot');
+            spot.style.top = touch.pageY - 35;
+            spot.style.left = touch.pageX - 35;
+            document.body.appendChild(spot);
+        })
+        timer = setInterval(function() {
+            renderTouches(touches);
+        },16);
+    },false);
+
+    document.addEventListener('touchmove',function(e){
+        e.preventDefault();
+        touches = e.touches;
+    });
+
+    function renderTouches(touches){
+        if(!touches){
+            return;
+        };
+        [].forEach.call(touches,function(touch){
+            var spot = spots[touch.identifier];
+            if(spot){
+                spot.style.top = touch.pageY - 35;
+                spot.style.left = touch.pageX - 35;
+            }
+        })
+    }
+
+    document.addEventListener('touchend',function(e){
+        e.preventDefault();
+        [].forEach.call(e.changedTouches,function(touch){
+            var spot = spots[touch.identifier];
+            if(spot){
+                document.body.removeChild(spot);
+                delete spots[touch.indentifier];
+            }
+        })
+        if(e.changedTouches.length === 0){
+            clearInterval(timer);
+        }
+    })
+
+    //touches：表示当前位于屏幕上的所有手指动作的列表，是一个TouchList类型的对象，TouchList是一个类数组对象，它里面装的是Touch对象
+    //targetTouches：位于当前DOM元素上的手指动作的TouchList列表
+    //changedTouches：涉当前事件的手指动作的列表，例如，在一个touchend事件中，这将是移开的那根手指
+    //touchstart等事件在触发时是允许多个手指同时触摸屏幕的，每一根手指都会产生一个Touch对象，包含以下属性：identifier一个数字，用于唯一标识触摸会话中的当前手指，target作为动作目标的DOM元素，及坐标相关clientX/Y等
+
+</script-->
+<!--script type="text/javascript">
+//Keyboard MultiKey
+    var keyCodeArry = [];
+    document.onkeydown = function(ev) {
+        var oEvent = ev || event;
+        keyCode = oEvent.keyCode;
+        keyCodeArry = addKeyCodeArry(keyCode, keyCodeArry);
+        console.log(keyCodeArry);
+    }
+    document.onkeyup = function(ev) {
+        var oEvent = ev || event;
+        keyCode = oEvent.keyCode;
+        keyCodeArry = deletKeyCodeArry(keyCode, keyCodeArry);
+        console.log(keyCodeArry);
+    }
+
+    function addKeyCodeArry(num, arr) {
+        var check = 0;
+        for(var i = 0; i < arr.length; i++) {
+            if(arr[i] == num) {
+                check = 1;
+            }
+        }
+        if(check == 0) {
+            arr.push(num);
+        }
+        return arr;
+    }
+
+    function deletKeyCodeArry(num, arr) {
+        for(var i = 0; i < arr.length; i++) {
+            if(arr[i] == num) {
+                arr.splice(i, 1);
+            }
+        }
+        return arr;
+    }
+
+    var body = document.getElementsByTagName("body")[0];
+    var x = 300;
+    var y = 200;
+    body.addEventListener("keydown", function(e) {
+        console.log(e.keyCode);
+        var speed = 10;
+
+        for(var i=0; i < keyCodeArry.length; i++) {
+            keyCode = keyCodeArry[i];
+            if(keyCode == 87) {
+                //w
+                y -= speed;
+            }
+
+            if(keyCode == 83) {
+                //s
+                y += speed;
+            }
+
+            if(keyCode == 65) {
+                //a
+                x -= speed;
+            }
+
+            if(keyCode == 68) {
+                //d
+                x += speed;
+            }
+        }
+        console.log(x + "," + y)
+    });
+
+    function lan_Click() {
+        var lan = document.getElementById("language");
+        var lans = ["C", "C++", "Java", "Php", "C#"];
+        if(lan.children.length == 0) {
+            for(var i = 0; i < lans.length; i++) {
+                var li = document.createElement("li");
+                li.innerHTML = lans[i];
+                //动态绑定事件
+                li.addEventListener("click", function(e) {
+                    console.log(e.path[0].innerHTML);
+                });
+                lan.appendChild(li);
+            }
+        } else {
+            lan.innerHTML = null;
+        }
+    }
+</script-->
+<script>
+    const WMPlayer_AudioPlayer = {
+        LoadMusic: function(id, src, autoplay = 1, loop = 0) {
+            eval("window.WMPlayer_Audio_" + id + " = " + "new Audio('" + src + "');");
+            if (loop == 1) {
+                eval("window.WMPlayer_Audio_" + id + ".loop = 1;");
+            }
+            if (autoplay == 1) {
+                eval("window.WMPlayer_Audio_" + id + ".autoplay = 1;");
+            }
+            return 0;
+        },
+        PlayMusic: function(id) {
+            eval("window.WMPlayer_Audio_" + id + ".play();");
+            return 0;
+        },
+        PauseMusic: function(id) {
+            eval("window.WMPlayer_Audio_" + id + ".pause();");
+            return 0;
+        },
+        LoopMusic: function(id, loop = 1) {
+            eval("window.WMPlayer_Audio_" + id + ".loop = " + loop + ";");
+            return 0;
+        },
+        MuteMusic: function(id, mute = 1) {
+            eval("window.WMPlayer_Audio_" + id + ".muted = " + mute + ";");
+            return 0;
+        },
+        ChangeMusicVolume: function(id, volume = 1) {
+            eval("window.WMPlayer_Audio_" + id + ".volume = " + volume + ";");
+            return 0;
+        },
+        ChangeMusicSpeed: function(id, speed = 1) {
+            eval("window.WMPlayer_Audio_" + id + ".playbackRate = " + speed + ";");
+            return 0;
+        },
+        ChangeMusicCurrentTime: function(id, currenttime = 0) {
+            eval("window.WMPlayer_Audio_" + id + ".currentTime = " + currenttime + ";");
+            return 0;
+        },
+        GetMusicDuration: function(id) {
+            return eval("window.WMPlayer_Audio_" + id + ".duration;");
+        },
+        GetMusicCurrentTime: function(id) {
+            return eval("window.WMPlayer_Audio_" + id + ".currentTime;");
+        },
+        GetMusicSpeed: function(id) {
+            return eval("window.WMPlayer_Audio_" + id + ".playbackRate;");
+        },
+        GetMusicMute: function(id) {
+            return eval("window.WMPlayer_Audio_" + id + ".muted;");
+        },
+        GetMusicLoop: function(id) {
+            return eval("window.WMPlayer_Audio_" + id + ".loop;");
+        },
+        GetMusicSrc: function(id) {
+            return eval("window.WMPlayer_Audio_" + id + ".currentSrc;");
+        }
+    }
+    
+    function playnote(noteid) {
+        WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/" + noteid + ".wav");
+        return 0;
+    }
+    
+    window.WMKeyMirrorSelecter = 0;
+    //49, 50, 51, 52, 53, 54, 55, 56, 57, 48
+    //81, 87, 69, 82, 84, 89, 85, 73, 79, 80
+    //65, 83, 68, 70, 71, 72, 74, 75, 76
+    //90, 88, 67, 86, 66, 78, 77
+    function WMKeyMirrorDefault(keyCode) {
+        switch (keyCode) {
+            //81, 87, 69, 82, 84, 89, 85
+            case 81:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C5.wav");
+                break;
+            case 87:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D5.wav");
+                break;
+            case 69:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/E5.wav");
+                break;
+            case 82:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F5.wav");
+                break;
+            case 84:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G5.wav");
+                break;
+            case 89:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A5.wav");
+                break;
+            case 85:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/B5.wav");
+                break;
+    
+            //65, 83, 68, 70, 71, 72, 74
+            case 65:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C4.wav");
+                break;
+            case 83:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D4.wav");
+                break;
+            case 68:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/E4.wav");
+                break;
+            case 70:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F4.wav");
+                break;
+            case 71:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G4.wav");
+                break;
+            case 72:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A4.wav");
+                break;
+            case 74:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/B4.wav");
+                break;
+    
+            //90, 88, 67, 86, 66, 78, 77
+            case 90:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C3.wav");
+                break;
+            case 88:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D3.wav");
+                break;
+            case 67:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/E3.wav");
+                break;
+            case 86:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F3.wav");
+                break;
+            case 66:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+                break;
+            case 78:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A3.wav");
+                break;
+            case 77:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/B3.wav");
+                break; 
+        }
+    }
+    
+    function WMKeyMirrorWindsongLyre(keyCode) {
+        switch (keyCode) {
+            //81, 87, 69, 82, 84, 89, 85
+            case 81:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C5.wav");
+                break;
+            case 87:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D5.wav");
+                break;
+            case 69:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/E5.wav");
+                break;
+            case 82:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F5.wav");
+                break;
+            case 84:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G5.wav");
+                break;
+            case 89:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A5.wav");
+                break;
+            case 85:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/B5.wav");
+                break;
+    
+            //65, 83, 68, 70, 71, 72, 74
+            case 65:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C4.wav");
+                break;
+            case 83:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D4.wav");
+                break;
+            case 68:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/E4.wav");
+                break;
+            case 70:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F4.wav");
+                break;
+            case 71:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G4.wav");
+                break;
+            case 72:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A4.wav");
+                break;
+            case 74:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/B4.wav");
+                break;
+    
+            //90, 88, 67, 86, 66, 78, 77
+            case 90:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C3.wav");
+                break;
+            case 88:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D3.wav");
+                break;
+            case 67:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/E3.wav");
+                break;
+            case 86:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F3.wav");
+                break;
+            case 66:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+                break;
+            case 78:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A3.wav");
+                break;
+            case 77:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/B3.wav");
+                break; 
+        }
+    }
+    
+    function WMKeyMirrorVintageLyre(keyCode) {
+        switch (keyCode) {
+            //81, 87, 69, 82, 84, 89, 85
+            case 81:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C5.wav");
+                break;
+            case 87:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/CS5.wav");
+                break;
+            case 69:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/DS5.wav");
+                break;
+            case 82:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F5.wav");
+                break;
+            case 84:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G5.wav");
+                break;
+            case 89:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/GS5.wav");
+                break;
+            case 85:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/AS5.wav");
+                break;
+    
+            //65, 83, 68, 70, 71, 72, 74
+            case 65:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C4.wav");
+                break;
+            case 83:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D4.wav");
+                break;
+            case 68:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/DS4.wav");
+                break;
+            case 70:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F4.wav");
+                break;
+            case 71:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G4.wav");
+                break;
+            case 72:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A4.wav");
+                break;
+            case 74:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/AS4.wav");
+                break;
+    
+            //90, 88, 67, 86, 66, 78, 77
+            case 90:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C3.wav");
+                break;
+            case 88:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D3.wav");
+                break;
+            case 67:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/DS3.wav");
+                break;
+            case 86:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F3.wav");
+                break;
+            case 66:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+                break;
+            case 78:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A3.wav");
+                break;
+            case 77:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/AS3.wav");
+                break; 
+        }
+    }
+    
+    function WMKeyMirrorSky(keyCode) {
+        switch (keyCode) {
+            //81, 87, 69, 82, 84, 89, 85
+            case 81:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C3.wav");
+                break;
+            case 87:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D3.wav");
+                break;
+            case 69:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/E3.wav");
+                break;
+            case 82:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F3.wav");
+                break;
+            case 84:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+                break;
+    
+            //65, 83, 68, 70, 71, 72, 74
+            case 65:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A3.wav");
+                break;
+            case 83:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/B3.wav");
+                break;
+            case 68:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C4.wav");
+                break;
+            case 70:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D4.wav");
+                break;
+            case 71:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/E4.wav");
+                break;
+    
+            //90, 88, 67, 86, 66, 78, 77
+            case 90:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/F4.wav");
+                break;
+            case 88:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G4.wav");
+                break;
+            case 67:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A4.wav");
+                break;
+            case 86:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/B4.wav");
+                break;
+            case 66:
+                WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C5.wav");
+                break;
+        }
+    }
+    
+    document.onkeydown = function(ev) {
+        var oEvent = ev || event;
+        keyCode = oEvent.keyCode;
+        if (window.WMKeyMirrorSelecter == 1) {
+            WMKeyMirrorWindsongLyre(keyCode);
+        } else if (window.WMKeyMirrorSelecter == 2) {
+            WMKeyMirrorVintageLyre(keyCode);
+        } else if (window.WMKeyMirrorSelecter == 3) {
+            WMKeyMirrorSky(keyCode);
+        } else {
+            WMKeyMirrorDefault(keyCode);
+        }
+    }
+    
+    function refreshnotemirror() {
+        if (notemirrorselector.value == "windsonglyre") {
+            window.WMKeyMirrorSelecter = 1;
+        } else if (notemirrorselector.value == "vintagelyre") {
+            window.WMKeyMirrorSelecter = 2;
+        } else if (notemirrorselector.value == "sky") {
+            window.WMKeyMirrorSelecter = 3;
+        } else {
+            window.WMKeyMirrorSelecter = 0;
+        }
+        PageResizer();
+    }
+    
+    function refreshnotekeyboard() {
+        if (notekeyboardselector.value == "windsonglyre") {
+            pianokeyboarddefault.style.display = "none";
+            pianokeyboardwindsonglyre.style.display = "block";
+            pianokeyboardvintagelyre.style.display = "none";
+            pianokeyboardsky.style.display = "none";
+        } else if (notekeyboardselector.value == "vintagelyre") {
+            pianokeyboarddefault.style.display = "none";
+            pianokeyboardwindsonglyre.style.display = "none";
+            pianokeyboardvintagelyre.style.display = "block";
+            pianokeyboardsky.style.display = "none";
+        } else if (notekeyboardselector.value == "sky") {
+            pianokeyboarddefault.style.display = "none";
+            pianokeyboardwindsonglyre.style.display = "none";
+            pianokeyboardvintagelyre.style.display = "none";
+            pianokeyboardsky.style.display = "block";
+        } else {
+            pianokeyboarddefault.style.display = "block";
+            pianokeyboardwindsonglyre.style.display = "none";
+            pianokeyboardvintagelyre.style.display = "none";
+            pianokeyboardsky.style.display = "none";
+        }
+        PageResizer();
+    }
+    
+    function PageResizer() {
+        pertabblock.style.height = (document.documentElement.clientHeight - pianocontainer.offsetHeight) / 2 + "px";
+    }
+    
+    window.onresize = function(){
+        PageResizer();
+    }
+</script>
+<script>
+window.MelodyOnGoing_Value = 0;
+function ASTAUTOPLAY() {
+    setInterval("MelodyOnGoing();",100);
+}
+function MelodyOnGoing() {
+    timeid = window.MelodyOnGoing_Value;
+    switch (timeid) {
+        case 0:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C3.wav");
+            break;
+        case 4:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+            break;
+        case 8:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+            break;
+        case 16:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A3.wav");
+            break;
+        case 24:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/AS3.wav");
+            break;
+        case 48:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C3.wav");
+            break;
+        case 52:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+            break;
+        case 56:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+            break;
+        case 64:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A3.wav");
+            break;
+        case 72:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/DS3.wav");
+            break;
+        case 80:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C3.wav");
+            break;
+        case 104:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C3.wav");
+            break;
+        case 108:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+            break;
+        case 112:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+            break;
+        case 120:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A3.wav");
+            break;
+        case 128:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/AS3.wav");
+            break;
+        case 152:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A3.wav");
+            break;
+        case 156:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+            break;
+        case 160:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/A3.wav");
+            break;
+        case 164:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/AS3.wav");
+            break;
+        case 168:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/D4.wav");
+            break;
+        case 172:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/DS4.wav");
+            break;
+        case 176:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C4.wav");
+            break;
+        case 184:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/AS3.wav");
+            break;
+        case 192:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/G3.wav");
+            break;
+        case 200:
+            WMPlayer_AudioPlayer.LoadMusic("note5", "./harp/C3.wav");
+            break;
+        default:
+            break;
+            //
+    }
+    timeid = timeid + 1;
+    window.MelodyOnGoing_Value = timeid;
+}
+
+PageResizer();
+</script>
+</body>
+</html>
