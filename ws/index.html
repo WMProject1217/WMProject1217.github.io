@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" href="/icon.ico" type="image/icon"/>
+    <title>WMProject1217 Studios</title>
+</head>
+<body>
+    <style>
+        body {
+            display: block;
+            margin: 0px;
+        }
+
+        .topbar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 54px;
+            background-color: rgba(0,0,0,0.84);
+            user-select: none;
+        }
+
+        .topbar button {
+            cursor: pointer;
+            border: 0px solid #FFFFFF;
+            background-color: transparent;
+            color: #FFFFFF;
+            outline: 0;
+            transition: all 0.3s;
+            text-shadow: 1px 1px 8px rgba(0,0,0,0.15);
+        }
+
+        .topbar button:hover:enabled {
+            background-color: #FFFFFF;
+            border-color: transparent;
+            color: #000000;
+            box-shadow: 1px 1px 30px rgba(0,0,0,0.15),0 6px 15px rgba(36,37,38,0.15) inset 5px 5px 15px transparent;
+        }
+
+        .topbar button:active:enabled {
+            background-color: #D9D9D9;
+        }
+
+        .pagemain {
+            margin-top: 54px;
+        }
+
+        .pagestablk {
+            position: relative;
+            height: calc(100vh - 54px);
+            width: 100%;
+            user-select: none;
+        }
+
+        .pagestablk video {
+            position: absolute;
+            z-index: -1;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pagestablk .leftbox {
+            position: absolute;
+            left: 0px;
+            height: 100%;
+            width: 50%;
+            background-color: rgba(0,0,0,0.48);
+            z-index: 1;
+        }
+
+        .pagestablk .leftbox .int {
+            position: relative;
+            top: 38%;
+            right: 10px;
+            height: auto;
+            width: 100%;
+            text-align: right;
+            color: #FFFFFF;
+            font-size: 64px;
+            text-shadow: 2px 2px 8px #5F5F5F;
+        }
+
+        .pagestablk .leftbox .str {
+            position: relative;
+            top: 38%;
+            right: 10px;
+            height: auto;
+            width: 100%;
+            text-align: right;
+            color: #FFFFFF;
+            font-size: 64px;
+            text-shadow: 2px 2px 8px #5F5F5F;
+        }
+
+        .pagestablk .rightbox {
+            position: absolute;
+            right: 0px;
+            height: 100%;
+            width: 50%;
+            background-color: rgba(255,255,255,0.48);
+            z-index: 1;
+        }
+
+        .pagestablk .rightbox .int {
+            position: relative;
+            top: calc(38% - 37px);
+            left: 10px;
+            height: auto;
+            width: 400px;
+            text-align: left;
+            color: #000000;
+            font-size: 64px;
+            text-shadow: 2px 2px 8px #5F5F5F;
+        }
+
+        .pagestbblk {
+            position: relative;
+            height: auto;
+            width: 100%;
+            user-select: none;
+        }
+
+        .backgroundtm {
+            position: absolute;
+            z-index: -2;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .backgroundrt {
+            position: absolute;
+            z-index: -1;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.32);
+        }
+
+        .pagestbblk .et {
+            margin-left: 24px;
+            border: 1px solid transparent;
+            background-color: rgba(255,255,255,0.84);
+            width: calc(100% - 48px);
+        }
+
+        .pagestbblk h1 {
+            font-weight: normal;
+            border-left: 4px solid rgb(231, 27, 100);
+            padding-left: 15px;
+        }
+
+        .pagestbblk .developers img {
+            float: left;
+            margin-right: 20px;
+            height: 64px;
+            width: 64px;
+        }
+
+        .pagestcblk {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .pageedblk {
+            position: relative;
+            height: 320px;
+            width: 100%;
+            background-color: #3D3D3D;
+        }
+
+        ::-webkit-scrollbar {
+            width: 16px;
+            height: 16px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #FFFFFF;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #D7D7D7;
+        }
+
+        ::-webkit-scrollbar-thumb:hover:enabled {
+            background-color: #A7A7A7;
+        }
+
+        ::-webkit-scrollbar-thumb:active:enabled {
+            background-color: #7A7A7A;
+        }
+
+    </style>
+    <div class="topbar">
+        <img src="./assets/logo.png" style="position: absolute; top: 0px; left: 0px;"/>
+        <button onclick="window.location.href='./index.html';" style="position: absolute; top: 0px; left: 240px; width: 120px; height: 54px; font-size: 24px;">首页</button>
+        <button onclick="window.location.href='./projects/index.html';" style="position: absolute; top: 0px; left: 360px; width: 120px; height: 54px; font-size: 24px;">项目</button>
+        <button onclick="window.location.href='../donate/index.html';" style="position: absolute; top: 0px; left: 480px; width: 120px; height: 54px; font-size: 24px;">赞助</button>
+        <button style="position: absolute; top: 0px; left: 600px; width: 120px; height: 54px; font-size: 24px;">下载</button>
+        <button style="position: absolute; top: 0px; left: 720px; width: 120px; height: 54px; font-size: 24px;">关于</button>
+    </div>
+    <div class="pagemain">
+        <div class="pagestablk">
+            <video src="./assets/video.mp4" autoplay loop muted></video>
+            <span class="leftbox">
+                <div class="int">WMProject1217</div>
+                <div class="str">Studios</div>
+            </span>
+            <span class="rightbox">
+                <div class="int">THE<br>FORGET<br>MEMORY</div>
+            </span>
+        </div>
+        <div class="pagestbblk">
+            <br/>
+            <img class="backgroundtm" src="./assets/image.jpg" />
+            <div class="backgroundrt"></div>
+            <div class="et">
+                <h1>简介</h1>
+                <p>本网站参照 HTML5 代码规范进行编写，不支持旧式浏览器。若您的浏览器不支持 HTML5，一般会在主页弹出窗口提示。如要访问该网页，请选择更新浏览器。</p>
+                <p>本域名提供商为 <a href="http://cloud.net.wm/">本地服务器</a>，空间提供商为 <a href="http://cloud.net.wm/">本地服务器</a>。</p>
+                <p>本网站及其所有隶属网站都遵循此<a href="http://blog.net.wm/index.php/terms-of-use.html">用户条款</a>与<a href="http://blog.net.wm/index.php/privacy-policy.html">隐私政策</a>。</p>
+            </div>
+            <div class="et">
+                <h1>开发者</h1>
+                <div class="developers">
+                    <img src="./assets/user.png">
+                    <h3>WMProject1217</h3>
+                    <p>WMProject1217 Studios 站长。</p>
+                </div>
+            </div>
+            <div class="et">
+                <h1>联系我们</h1>
+                <p>联系不到（</p>
+            </div>
+            <br/>
+        </div>
+        <div class="pagestcblk">
+            //此页面上所有引用的视频和图片均出于非商业性个人性质使用，如果这侵犯了您的版权，请通过邮箱联系 wmproject1217@outlook.com
+        </div>
+        <div class="pageedblk">
+            //
+        </div>
+    </div>
+</body>
+</html>
