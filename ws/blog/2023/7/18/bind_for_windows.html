@@ -1,0 +1,613 @@
+<html>
+
+<head>
+	<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+	<meta name=Generator content="Microsoft Word 15 (filtered)">
+	<style>
+		<!--
+		/* Font Definitions */
+		@font-face {
+			font-family: "Cambria Math";
+			panose-1: 2 4 5 3 5 4 6 3 2 4;
+		}
+
+		@font-face {
+			font-family: 等线;
+			panose-1: 2 1 6 0 3 1 1 1 1 1;
+		}
+
+		@font-face {
+			font-family: "等线 Light";
+			panose-1: 2 1 6 0 3 1 1 1 1 1;
+		}
+
+		@font-face {
+			font-family: "\@等线";
+			panose-1: 2 1 6 0 3 1 1 1 1 1;
+		}
+
+		@font-face {
+			font-family: "\@等线 Light";
+		}
+
+		/* Style Definitions */
+		p.MsoNormal,
+		li.MsoNormal,
+		div.MsoNormal {
+			margin: 0cm;
+			margin-bottom: .0001pt;
+			text-align: justify;
+			text-justify: inter-ideograph;
+			font-size: 10.5pt;
+			font-family: 等线;
+		}
+
+		h1 {
+			mso-style-link: "标题 1 字符";
+			margin-top: 17.0pt;
+			margin-right: 0cm;
+			margin-bottom: 16.5pt;
+			margin-left: 0cm;
+			text-align: justify;
+			text-justify: inter-ideograph;
+			line-height: 240%;
+			page-break-after: avoid;
+			font-size: 22.0pt;
+			font-family: 等线;
+		}
+
+		h2 {
+			mso-style-link: "标题 2 字符";
+			margin-top: 13.0pt;
+			margin-right: 0cm;
+			margin-bottom: 13.0pt;
+			margin-left: 0cm;
+			text-align: justify;
+			text-justify: inter-ideograph;
+			line-height: 173%;
+			page-break-after: avoid;
+			font-size: 16.0pt;
+			font-family: "等线 Light";
+		}
+
+		h3 {
+			mso-style-link: "标题 3 字符";
+			margin-top: 13.0pt;
+			margin-right: 0cm;
+			margin-bottom: 13.0pt;
+			margin-left: 0cm;
+			text-align: justify;
+			text-justify: inter-ideograph;
+			line-height: 173%;
+			page-break-after: avoid;
+			font-size: 16.0pt;
+			font-family: 等线;
+		}
+
+		a:link,
+		span.MsoHyperlink {
+			color: #0563C1;
+			text-decoration: underline;
+		}
+
+		a:visited,
+		span.MsoHyperlinkFollowed {
+			color: #954F72;
+			text-decoration: underline;
+		}
+
+		span.1 {
+			mso-style-name: "标题 1 字符";
+			mso-style-link: "标题 1";
+			font-weight: bold;
+		}
+
+		span.2 {
+			mso-style-name: "标题 2 字符";
+			mso-style-link: "标题 2";
+			font-family: "等线 Light";
+			font-weight: bold;
+		}
+
+		span.3 {
+			mso-style-name: "标题 3 字符";
+			mso-style-link: "标题 3";
+			font-weight: bold;
+		}
+
+		.MsoChpDefault {
+			font-family: 等线;
+		}
+
+		/* Page Definitions */
+		@page WordSection1 {
+			size: 595.3pt 841.9pt;
+			margin: 72.0pt 90.0pt 72.0pt 90.0pt;
+			layout-grid: 15.6pt;
+		}
+
+		div.WordSection1 {
+			page: WordSection1;
+		}
+	</style>
+
+</head>
+
+<body lang=ZH-CN link="#0563C1" vlink="#954F72" style='text-justify-trim:punctuation'>
+
+	<div class=WordSection1 style='layout-grid:15.6pt'>
+
+		<h1><span lang=EN-US>bind for Windows</span>的安装、配置和运行</h1>
+
+		<p class=MsoNormal>用过<span lang=EN-US>Windows DNS</span>服务器的都知道<span lang=EN-US>Windows DNS</span>服务器占用较多<span
+				lang=EN-US>RAM</span>，且功能比<span lang=EN-US>bind</span>少得多。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img width=553 height=73 id="图片 1" src=".//image001.jpg"></span></p>
+
+		<p class=MsoNormal>某些时候，我们必须在<span lang=EN-US>Windows</span>系统上配置<span lang=EN-US>DNS</span>服务器，此时选择<span
+				lang=EN-US>bind for Windows</span>是建议的。</p>
+
+		<h2>安装、配置和运行<span lang=EN-US>bind for Windows</span></h2>
+
+		<p class=MsoNormal>首先打开<span lang=EN-US><a
+					href="ftp://ftp.isc.org/isc/bind9/">ftp://ftp.isc.org/isc/bind9/</a></span>，从中找一个比较新的版本文件夹打开，此处选择的是<span
+				lang=EN-US>9.17.9</span>版本。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=478 id="图片 2" src=".//image002.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>下载其中的<span lang=EN-US>BIND9.17.9.x64.zip</span>。</p>
+
+		<p class=MsoNormal>使用你最喜欢的压缩文件管理器打开此文件，你会看到其中包含以下内容。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=288 id="图片 3" src=".//image003.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>其中<span lang=EN-US>BINDInstall.exe</span>是自带的安装程序，但是由于各种原因，本教程不会使用此程序。</p>
+
+		<p class=MsoNormal>在你喜欢的，不包含特殊字符的目录里创建<span lang=EN-US>bind</span>文件夹，此处使用的是<span
+				lang=EN-US>X:\WMSystem\lib\</span>，然后在其中创建<span lang=EN-US>bin</span>和<span lang=EN-US>etc</span>文件夹。
+		</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=151 id="图片 4" src=".//image004.jpg"></span>
+		</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=129 id="图片 5" src=".//image005.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>将<span lang=EN-US>BIND9.17.9.x64.zip</span>像这样完全解压到<span lang=EN-US>bind\bin</span>文件夹中。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=385 id="图片 6" src=".//image006.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>打开注册表编辑器，切换到到<span lang=EN-US>HKEY_LOCAL_MACHINE\SOFTWARE\ISC\BIND</span>（没有就创建），创建字段<span
+				lang=EN-US>InstallDir</span>，数据为你<span lang=EN-US>bind</span>目录的位置，此处为<span
+				lang=EN-US>X:\WMSystem\lib\bind</span>。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=554 height=319 id="图片 7" src=".//image007.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>然后打开<span lang=EN-US>bind\etc</span>文件夹，新建文本文档，然后重命名为<span lang=EN-US>named.conf</span>。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=161 id="图片 9" src=".//image008.png"></span>
+		</p>
+
+		<p class=MsoNormal>使用<span lang=EN-US>Visual Studio Code/Visual Studio
+				Codium/Atom/vim/nano</span>或者其他任何可以编辑<span lang=EN-US>UTF-8</span>文本文档而不会留下<span
+				lang=EN-US>BOM</span>头的文本编辑器打开<span lang=EN-US>named.conf</span>，然后写入以下内容。</p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>options {</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; # </span>你的<span lang=EN-US>bind\etc</span>文件夹完整路径</p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; directory &quot;X:\WMSystem\lib\bind\etc&quot;;</span>
+		</p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; # </span>如果<span lang=EN-US>bind</span>无法解析，会向以下<span
+				lang=EN-US>DNS</span>服务器发送查询请求。</p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; # </span>可以在下面的<span lang=EN-US>IP</span>地址位置上填写<span
+				lang=EN-US>ISP</span>的<span lang=EN-US>DNS</span>地址。</p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; forwarders {</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.1.1.1;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.0.1.1;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				8.8.8.8;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				8.8.4.4;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; };</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; # </span>允许哪些<span lang=EN-US>IP</span>查询。</p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; # </span>此处允许了本机和一个<span
+				lang=EN-US>A</span>类局域网，如果你要在<span lang=EN-US>C</span>类局域网上使用，添加的内容可能为<span
+				lang=EN-US>192.168.1.0/24;</span>。</p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; allow-query {</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				127.0.0.1;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				10.0.0.0/8;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; };</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>};</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US># </span>根<span lang=EN-US>DNS</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>zone &quot;.&quot; {</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; type hint;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; file
+				&quot;named.root&quot;;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>};</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US># localhost</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>zone &quot;localhost&quot; IN {</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; type master;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; file
+				&quot;localhost.zone&quot;;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; allow-update { none; };</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>};</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US># localhost</span>的反向解析</p>
+
+		<p class=MsoNormal><span lang=EN-US>zone &quot;0.0.127.in-addr.arpa&quot; {</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; type master;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; file
+				&quot;localhost.rev&quot;;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>};</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US># example.com</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>zone &quot;example.com&quot; IN {</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; type master;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; file &quot;example.com.zone&quot;;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>};</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=554 height=328 id="图片 10" src=".//image009.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>就像<span lang=EN-US>Linux</span>上的<span lang=EN-US>bind</span>一样，此处指定了一些域的<span
+				lang=EN-US>zone</span>文件和反向解析的<span lang=EN-US>rev</span>文件，应该在<span lang=EN-US>bind\etc</span>下创建这些文件。
+		</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=179 id="图片 11" src=".//image010.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>此处文件内容如下。</p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>## example.com.zone</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>$TTL 1D</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>@&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SOA&nbsp;&nbsp;&nbsp;&nbsp; example.com.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				root. example.com. (</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				2007091701&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; Serial</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				30800&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Refresh</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				7200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Retry</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				604800&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Expire</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				300
+				)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Minimum</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; example.com.</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>example.com.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.0.10.10</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>www.example.com.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.0.10.10</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp; A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.0.10.10</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>## localhost.zone</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>$TTL 1D</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>@&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SOA&nbsp;&nbsp;&nbsp;&nbsp;
+				localhost.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; root.localhost. (</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				2007091701&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; Serial</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				30800&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Refresh</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				7200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Retry</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				604800&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;;
+				Expire</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				300
+				)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Minimum</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; localhost.</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>localhost.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				127.0.0.1</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>## localhost.rev</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>$TTL&nbsp;&nbsp;&nbsp; 1D</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>@&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SOA&nbsp;&nbsp;&nbsp;
+				localhost.&nbsp;&nbsp;&nbsp; root.localhost. (</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				2007091701&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; Serial</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30800&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Refresh</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				7200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Retry</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				604800&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Expire</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				300
+				)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				; Minimum</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; localhost.</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PTR&nbsp;&nbsp;&nbsp;&nbsp; localhost.</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>## named.root</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; d.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; b.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; l.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; k.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; f.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; h.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; m.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; c.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; a.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; g.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; i.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; e.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span
+				lang=EN-US>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				480717&nbsp;&nbsp;&nbsp; IN&nbsp;&nbsp;&nbsp; NS&nbsp;&nbsp; j.root-servers.net.</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+		<p class=MsoNormal>然后回到<span lang=EN-US>bind\bin</span>，新建文本文档，然后重命名为<span
+				lang=EN-US>start.cmd</span>，用记事本打开，写入以下内容。</p>
+
+		<p class=MsoNormal><span lang=EN-US>cd /d %~dp0</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>named -f -g -d 1</span></p>
+
+		<p class=MsoNormal><span lang=EN-US>pause</span></p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=358 id="图片 12" src=".//image011.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>用管理员权限执行此脚本，等待一段时间后，你将看到以下窗口，这说明<span lang=EN-US>bind</span>已经启动。</p>
+
+		<p class=MsoNormal>如果需要停止<span lang=EN-US>bind</span>，仅需关闭这个命令行窗口。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=362 id="图片 13" src=".//image012.jpg"></span>
+		</p>
+
+		<h2>其它</h2>
+
+		<h3>配置<span lang=EN-US>rndc</span></h3>
+
+		<p class=MsoNormal>按下<span lang=EN-US>Windows+X</span>，然后按下<span lang=EN-US>A</span>，使用管理员权限打开<span
+				lang=EN-US>cmd</span>，并 <span lang=EN-US>cd /d </span>到<span lang=EN-US>bind\bin</span>目录。</p>
+
+		<p class=MsoNormal>输入<span lang=EN-US>rndc-confgen –a</span>，按下<span lang=EN-US>Enter</span>。</p>
+
+		<p class=MsoNormal>输入<span lang=EN-US>rndc-confgen &gt; rndc.conf</span>，按下<span lang=EN-US>Enter</span>。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=362 id="图片 14" src=".//image013.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>执行后应存在<span lang=EN-US>bind\etc\rndc.key</span>和<span
+				lang=EN-US>bind\bin\rndc.conf</span>这两个文件。</p>
+
+		<p class=MsoNormal>如果不存在，请在网络上搜索错误代码，依照网络上的教程来试图处理此错误。</p>
+
+		<h3><span lang=EN-US>named.root</span>的生成</h3>
+
+		<p class=MsoNormal>其实<span lang=EN-US>named.root</span>可以自动生成，这要求本地计算机网络畅通。</p>
+
+		<p class=MsoNormal>按下<span lang=EN-US>Windows+X</span>，然后按下<span lang=EN-US>A</span>，使用管理员权限打开<span
+				lang=EN-US>cmd</span>，并<span lang=EN-US> cd /d </span>到<span lang=EN-US>bind\bin</span>目录。</p>
+
+		<p class=MsoNormal>输入<span lang=EN-US>dig &gt; ../etc/named.root</span>，按下<span lang=EN-US>Enter</span>。</p>
+
+		<p class=MsoNormal>执行后应存在<span lang=EN-US>bind\etc\named.root</span>。</p>
+
+		<h3>报错</h3>
+
+		<p class=MsoNormal>按照本文的<span lang=EN-US>&quot;</span>安装、配置和运行<span lang=EN-US>bind
+				for Windows&quot;</span>节来检查，如果没有问题，请按以下步骤修改文件夹安全设置。</p>
+
+		<p class=MsoNormal>右键文件夹属性，切换到<span lang=EN-US>&quot;</span>安全<span lang=EN-US>&quot;</span>选项卡，单击<span
+				lang=EN-US>&quot;</span>高级<span lang=EN-US>&quot;</span>。</p>
+
+		<p class=MsoNormal>单击<span lang=EN-US>&quot;</span>所有者<span lang=EN-US>&quot;</span>旁边的更改按钮，输入<span
+				lang=EN-US>Everyone</span>，按下确定。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=342 id="图片 15" src=".//image014.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>选中<span lang=EN-US>&quot;</span>替换子容器和对象的所有者<span lang=EN-US>&quot;</span>。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=337 height=68 id="图片 16" src=".//image015.png"></span>
+		</p>
+
+		<p class=MsoNormal>单击窗口下半部分的<span lang=EN-US>&quot;</span>禁用继承<span lang=EN-US>&quot;</span>按钮，选择<span
+				lang=EN-US>&quot;</span>从此对象中删除所有已继承的权限<span lang=EN-US>&quot;</span>。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=553 height=428 id="图片 17" src=".//image016.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>单击<span lang=EN-US>&quot;</span>添加<span lang=EN-US>&quot;</span>，选择主体，输入<span
+				lang=EN-US>Everyone</span>，确定。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=554 height=323 id="图片 18" src=".//image017.jpg"></span>
+		</p>
+
+		<p class=MsoNormal>在基本权限中勾选完全控制。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=525 height=401 id="图片 19" src=".//image018.png"></span>
+		</p>
+
+		<p class=MsoNormal>勾选<span lang=EN-US>&quot;</span>使用可从此对象继承的权限项目替换所有子对象的权限项目<span
+				lang=EN-US>&quot;</span>，按下确定。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=418 height=30 id="图片 20" src=".//image019.png"></span>
+		</p>
+
+		<p class=MsoNormal>出现的所有提示框都按<span lang=EN-US>&quot;</span>是<span lang=EN-US>&quot;</span>。</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=528 height=251 id="图片 21" src=".//image020.png"></span>
+		</p>
+
+		<p class=MsoNormal><span lang=EN-US><img border=0 width=506 height=205 id="图片 22" src=".//image021.png"></span>
+		</p>
+
+		<p class=MsoNormal>此时权限已经被更新。</p>
+
+		<p class=MsoNormal>如果仍然报错，请在网络上搜索错误代码，依照网络上的教程来试图处理此错误。</p>
+
+	</div>
+
+</body>
+
+</html>
