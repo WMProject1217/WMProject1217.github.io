@@ -4,13 +4,66 @@
 <head>
     <meta charset="utf-8" />
     <title>WMWebServer</title>
+    <style>
+        * {
+            font-size: 16px;
+        }
+
+        code {
+            display: block;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
-    <div>WMWebServer Beta Downloads</div>
-    <div style="border: solid 1px #000000">
-        <div>WMWebServer Beta Version 0.16.1.255-rc0</div>
-        <div><a href="https://wmproject1217.lanzoum.com/b0plopf0b">Download from lanzou</a><span>密码:8c89</span></div>
+    <div>
+        <h3>WMWebServer 可以做什么？</h3>
+        <div>WMWebServer 是基于C艹的x86_64静态HTTP网页服务器，她可以使用多线程非阻塞的方式响应请求。</div>
+        <div>WMWebServer 是闭源的免费软件，你可以将其用于各种非商业用途。</div><div>若要将 WMWebServer 用作商业用途，请联系作者。</div>
+        <h3>获取 WMWebServer</h3>
+        <div style="border: solid 1px #000000; display: inline-block; padding: 2px;">
+            <div>WMWebServer Beta Version 0.16.1.255-rc0 (Cured Edition)</div>
+            <div><a href="https://wmproject1217.lanzoum.com/b0plopf0b" target="_blank">蓝奏云</a><span>&nbsp;密码:8c89</span></div>
+        </div>
+        <h3>启动参数</h3>
+        <div>Windows:</div>
+        <code>WMWebServer.exe [-d] [-p:1217] [-r:X:/WMSystem/www]</code>
+        <div>Linux:</div>
+        <code>./wmwebserver.ucc [-d] [-p:1217] [-r:/data/www]</code>
+        <br>
+        <div>[-d] 可选。以调试模式运行服务器。当以调试模式运行服务器时，服务器将输出所有日志到屏幕。如果不指定，则仅输出警告和错误日志到屏幕。调试模式下服务器的速度可能减慢。</div>
+        <div>[-p:1217] 可选。在指定的端口上运行网站。如果不指定，则使用配置文件中的值。Linux中非root用户不能绑定1024以下的端口。</div>
+        <div>[-r:X:/WMSystem/www] 可选。使用指定的目录作为网站根目录。如果不指定，则使用配置文件中的值。请确认应用程序对该目录有访问权限。</div>
+        <br>
+        <div>若没有指定对应参数，WMWebServer 将使用配置文件中的值。</div>
+        <h3>配置文件</h3>
+        <div>WMWebServer 使用 config.wmst 作为配置文件。</div>
+        <br>
+        <div>对于 Cured 版本的 WMWebServer 来说，该文件位于 /etc/WMWebServer/ 或 X:/WMSystem/etc/WMWebServer/，其中X为计算机上系统磁盘的盘符。</div>
+        <div>对于 Portable 版本的 WMWebServer 来说，该文件位于应用程序相同目录下。</div>
+        <br>
+        <div>在 Windows 上，该文件的默认内容如下:</div>
+        <code>
+            <div>!#port=1217</div>
+            <div>!#path=X:/WMSystem/www</div>
+        </code>
+        <div>其中，X为计算机上系统磁盘的盘符。</div>
+        <br>
+        <div>在 Linux 上，该文件的默认内容如下:</div>
+        <code>
+            <div>!#port=1217</div>
+            <div>!#path=/data/www</div>
+        </code>
+        <br>
+        <div>若无法找到配置文件，WMWebServer 会使用其默认值。</div>
+        <h3>特性</h3>
+        <div>WMWebServer 的默认索引为 index.html。</div>
+        <div>WMWebServer 不会自动重定向。例如，当访问 /act 时，WMWebServer 不会将请求重定向到 /act/，而是返回错误页面。</div>
+        <div>当找不到根目录下的 index.html 时，WMWebServer 可能会返回标题为 200 OK 的页面。</div>
+        <div>当请求包含参数时，WMWebServer 不会处理任何参数，她将直接返回页面。</div>
+        <div>如果发送了 POST 请求，老版本 WMWebServer 返回空内容或返回 500 Internal Server Error，新版本 WMWebServer 会将其作为 GET 请求处理。</div>
+        <div>WMWebServer 的线程数量不是受限的，当有大量突发请求入站时，WMWebServer 可能会大量占用 CPU 导致系统卡顿。</div>
     </div>
 </body>
 
