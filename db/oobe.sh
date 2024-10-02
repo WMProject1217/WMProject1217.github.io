@@ -46,6 +46,6 @@ systemctl mask unattended-upgrades.service
 systemctl daemon-reload
 
 ##avoid system blocking when booting
-sed -i '/^\[Service\]/a TimeoutStartSec=5sec' /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
+##sed -i '/^\[Service\]/a TimeoutStartSec=5sec' /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
 
 echo "Done."
