@@ -1,0 +1,165 @@
+/*
+* Copyright(c) A.K.A Elysian GalGame Scripting Engine
+* WMProject1217 Studios 2024
+* Version: 1.5.2
+* FileName: ElysianEngine.css
+* Author: WMProject1217
+* LatestCommit: 2024-9-15
+*/
+
+.ElysianEngine_Container {
+    user-select: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1800;
+}
+
+.ElysianEngine_Container .status0 {
+    opacity: 0;
+}
+
+.ElysianEngine_Container .status1 {
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: .3s;
+}
+
+.ElysianEngine_Container .status2 {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: .3s;
+}
+
+.ElysianEngine_Container .status3 {
+    opacity: 1;
+}
+
+.ElysianEngine_Container .canvas {
+    position: fixed;
+    z-index: 1800;
+}
+
+.ElysianEngine_Container .canvas.noresize {
+    top: 0px;
+    left: 0px;
+}
+
+.ElysianEngine_Container .canvas.stretch {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: 100vh;
+    width: 100vw;
+}
+
+.ElysianEngine_Container .canvas.fitheight {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: 100vh;
+    width: 177.77vh;
+}
+
+.ElysianEngine_Container .canvas.fitwidth {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: 56.25vw;
+    width: 100vw;
+}
+
+.ElysianEngine_Container .talkbox {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    height: 25vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, .38);
+    z-index: 1804;
+}
+
+.ElysianEngine_Container .talkbox .name {
+    font-family: "Microsoft YaHei UI";
+    width: 100vw;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 3.3vh;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(252, 224, 88); 
+    text-shadow: 1px 1px 1px rgb(150, 127, 53);
+}
+
+.ElysianEngine_Container .talkbox .line {
+    width: 100vw; 
+    height: 2px; 
+    background-color: rgba(255, 255, 255, .1);
+}
+
+.ElysianEngine_Container .talkbox .data {
+    font-family: "Microsoft YaHei UI";
+    width: 80vw;
+    margin-left: 10vw; 
+    margin-top: 8px; 
+    font-size: 2.9vh; 
+    text-align: left; 
+    font-weight: bold; 
+    color: rgb(233, 222, 226); 
+    text-shadow: 1px 1px 1px rgb(125, 107, 125);
+}
+
+.ElysianEngine_Container .operatecatch {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1809;
+}
+
+.ElysianEngine_Container .choosebox {
+    position: fixed;
+    bottom: 25vh;
+    right: 0px;
+    height: auto;
+    width: min-content;
+    z-index: 1811;
+}
+
+.ElysianEngine_Container .choosebox .item {
+    font-family: "印品鸿蒙体";
+    display: block;
+    cursor: pointer;
+    border: 2px solid #AFAFAF;
+    background-color: rgba(0, 0, 0, .38);
+    color: #FFFFFF;
+    outline: 0;
+    min-height: 5.4vh;
+    width: 34vw;
+    margin: 1vh;
+    padding: 0.5vh 0.5vh 0.5vh 2vh;
+    text-align: left;
+    font-size: 3vh;
+    float: left;
+    transition-property: background-color, border, color, box-shadow;
+    transition-duration: .3s;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, .15);
+}
+
+.ElysianEngine_Container .choosebox .item:hover:enabled {
+    background-color: #FFFFFF;
+    border: 2px solid #9F9F9F;
+    color: #000000;
+    box-shadow: 1px 1px 30px rgba(0, 0, 0, .15), 0 6px 15px rgba(36, 37, 38, .15), inset 5px 5px 15px transparent;
+}
+
+.ElysianEngine_Container .choosebox .item:active:enabled {
+    background-color: #D9D9D9;
+}
