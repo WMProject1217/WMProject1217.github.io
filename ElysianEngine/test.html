@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Elysian Engine</title>
+    <link rel="stylesheet" href="./lib/wmcomlib.js/ElysianEngine.css">
+    <script src="./lib/wmcomlib.js/wmassetsloader.js"></script>
+    <script src="./lib/wmcomlib.js/ElysianEngine.js"></script>
+</head>
+
+<body>
+    <div>本测试使用的音频和图像由上海米哈游影铁科技有限公司持有版权，不得将此测试中的音频和图像以非测试目的分发给他人。未经上海米哈游影铁科技有限公司许可，不得将此测试中的音频和图像用作商业。</div>
+    <div>本测试中使用的音频已经暴力压缩，在启动测试前请将音量调小。</div>
+    <button id="removeme" onclick="init();removeme.remove()">RUN</button>
+    <script>
+        async function init() {
+            await window.ElysianEngine._init_({
+                script_chroot: "./assets/rcdata/",
+                script_onerrorresumenext: 0,
+                script_ticktimeout: 1,
+                save_disablecookie: 1,
+                save_nodemodechroot: "./saves/",
+                audio_voiceplaymode: 0,
+                audio_voicevolume: 1,
+                audio_bgmvolume: 1,
+                audio_bgsvolume: 1
+            });
+            await window.ElysianEngine.loadscript("./assets/ElysiaDX.wmgesh");
+        }
+    </script>
+</body>
+
+</html>
